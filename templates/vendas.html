@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if vendas_form %}
+            <table>
+                <tr>
+                    <th>access token</th>
+                    <th>idsSituacoes</th>
+                    <th>start date</th>
+                </tr>
+                <tr>
+                    <td>{{ vendas_form.access_token }}</td>
+                    <td>{{ vendas_form.ids_situacoes }}</td>
+                    <td>{{ vendas_form.start_date }}</td>
+                </tr>
+            </table>
+            <br>
+            <button type="submit" name="vendas_button" value="chosen_filters">submit</button>
+        
+        {% elif vendas_bling_dicts_list %}
+            <table>
+                <tr>
+                    {% for venda in vendas_bling_dicts_list|slice:":1" %}
+                        {% for key, value in venda.items %}
+                            <th>{{ key }}</th>
+                        {% endfor %}
+                    {% endfor %}
+                </tr>
+                {% for venda in vendas_bling_dicts_list %}
+                    <tr>
+                        {% for key, value in venda.items %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            
+       
+        {% endif %}
+    </form>
+</html>

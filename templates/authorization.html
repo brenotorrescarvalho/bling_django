@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if get_authorization_form %}
+            <table>
+                <tr>
+                    <th>client id</th>
+                </tr>
+                <tr>
+                    <td>{{ get_authorization_form.client_id }}</td>
+                </tr>
+            </table>
+            <br>
+            <button type="submit" name="authorization_button" value="get_authorization_form">submit</button>
+        {% elif get_token_form %}
+            <h4><a href="{{ authorization_final_url }}">authorization_final_url</a></h4>
+            <br>
+            <table>
+                <tr>
+                    <th>authorization code</th>
+                    <th>client secret</th>
+                </tr>
+                <tr>
+                    <td>{{ get_token_form.authorization_code }}</td>
+                    <td>{{ get_token_form.client_secret }}</td>
+                </tr>
+            </table>
+            <br>
+            <button type="submit" name="authorization_button" value="get_token_form">submit</button>
+
+            <input type="hidden" name="client_id" value="{{ client_id }}">
+        {% elif show_token %}
+            <table>
+                <tr>
+                    <th>access token</th>
+                </tr>
+                <tr>
+                    <td>{{ show_token }}</td>
+                </tr>
+            </table>
+        {% endif %}
+    </form>
+</html>
