@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% block content %}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% if get_authorization_form %}
@@ -41,4 +41,4 @@
             </table>
         {% endif %}
     </form>
-</html>
+{% endblock content %}
